@@ -1,0 +1,66 @@
+<%-- 
+    Document   : UpdateMaterial
+    Created on : Nov 10, 2020, 9:25:47 AM
+    Author     : GearVn
+--%>
+
+<%@page import="daoAdmin.MaterialAdminDAO"%>
+<%@page import="modelAdmin.Material"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<%
+    request.setCharacterEncoding("utf-8");
+    response.setCharacterEncoding("utf-8");
+%>
+<html>
+    <head>
+
+        <title>Ananas Material</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Colo Shop Template">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+        <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="styles/main_styles.css">
+        <link rel="stylesheet" type="text/css" href="styles/responsive.css">
+    </head>
+    <body>
+        <h1 style="text-align: center">Databoard Ananas</h1>
+        <div class="container" style="padding: 10% 10%;text-align: center;vertical-align: central;text-justify: auto">
+            <%
+                if (session.getAttribute("material") != null) {
+                    Material c1 = (Material) session.getAttribute("material");
+                    MaterialAdminDAO dao = new MaterialAdminDAO();
+                    Material c = dao.select(c1);
+            %>
+            <form action="./UpdateMaterial" method="POST">
+                <table class="table container">
+                    <tr>
+                        <th>ID</th>
+                        <td><input type="text" name="id" readonly="true" value="<%= c.getId()%>"></td>
+                    </tr>
+                    <tr>
+                        <th>Material Name</th>
+                        <td><input type="text" name="materialName" value="<%= c.getMaterialName()%>"></td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td><input type="text" name="description" value="<%= c.getDescription()%>"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="right">
+                            <input  class="btn btn-primary" type="submit" name="update" value="Update"></input>
+                            <!--<button class="btn btn-danger" type="reset" name="reset">Reset</button>-->
+                        </td>
+                    </tr>
+                    
+                </table>    
+            </form>
+            <%
+                }
+            %>
+
+        </div>
+    </body>
+</html>
